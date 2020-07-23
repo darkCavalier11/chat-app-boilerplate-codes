@@ -1,0 +1,15 @@
+const path = require('path')
+const express = require('express')
+const hbs = require('hbs')
+const app = express()
+const staticDir = path.join(__dirname, '../public')
+app.use(express.json())
+app.use(express.static(path.join(__dirname, staticDir))) 
+app.set('view engine', 'hbs')
+app.set('views', staticDir)
+app.get('/', (req, res)=>{
+    res.render('index.hbs')
+})
+app.listen(3000, (msg)=>{
+    console.log('at port 3000')
+})
