@@ -18,8 +18,9 @@ io.on('connection',(socket)=>{
     // socket.broadcast.emit() emit to all except the user
     socket.emit('new connection')
     socket.broadcast.emit('new client')
-    socket.on('message', (msg)=>{
+    socket.on('message', (msg, cb)=>{
         io.emit('message', msg)
+        cb() // send the user information that message is delivered
     })
     socket.on('disconnect', ()=>{
         io.emit('message', 'user left')
