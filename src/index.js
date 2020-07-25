@@ -25,13 +25,14 @@ io.on('connection',(socket)=>{
             return cb('Bad language not allowed')
         }
         io.emit('message', msg)
-        cb() // send the user information that message is delivered
+        cb() // send the user information that message is delivered. run on client side. kind of feedback function.
     })
     socket.on('disconnect', ()=>{
         io.emit('message', 'user left')
     })
-    socket.on('location', (location)=>{
+    socket.on('location', (location, cb)=>{
         socket.broadcast.emit('location', location)
+        cb() 
     })
 })
 
