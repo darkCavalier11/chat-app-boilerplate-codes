@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const socket = require('socket.io')
 const http = require('http')
+const Filter = require('bad-words')
 
 const app = express()
 
@@ -19,6 +20,10 @@ io.on('connection',(socket)=>{
     socket.emit('new connection')
     socket.broadcast.emit('new client')
     socket.on('message', (msg, cb)=>{
+        const filter = new Filter()
+        if (filter.isProfane(msg)){
+            return cb('Bad language not allowed')
+        }
         io.emit('message', msg)
         cb() // send the user information that message is delivered
     })
