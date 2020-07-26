@@ -17,17 +17,25 @@ socket.on('message', (msg)=>{
 socket.on('location', (loc)=>{
     console.log(loc)
 })
-
-document.querySelector('#send').addEventListener('click', (e)=>{
+const $messageButton = document.querySelector('#send') 
+const $message = document.querySelector('#message')
+$messageButton.addEventListener('click', (e)=>{
     e.preventDefault()
-    const msg = document.querySelector('#message').value
-    if (msg !== ''){
-        socket.emit('message', msg, (error)=>{
+    // disabling button until the message sent to server
+    $messageButton.setAttribute('disabled', 'disabled')
+    if ($message.value !== ''){
+        // enabling button again when message handled by server
+        socket.emit('message', $message.value, (error)=>{
+            $messageButton.removeAttribute('disabled')
+            $message.value = ''
+            $message.focus()
             if (error){
                 return console.log(error)
             }
             console.log('message was delivered') // Event Acknowledgement. server runs this fn when io.emit() runs
         })
+    }else{
+        $messageButton.removeAttribute('disabled')
     }
 })
 document.querySelector('#location').addEventListener('click', ()=>{
