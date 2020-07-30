@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="join.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>HELLO</h1>
-        <input type="text" name="" id="message">
-        <input type="submit" value="send" id="send">
-        <button id="location">send location</button>
-    <button id="increment">add</button>
-    <script src="./socket.io/socket.io.js"></script>
-    <script src="./js/chat.js"></script>
+    <form action="/join.html" method="get">
+        <input type="text" name="name" id="name" placeholder="Enter your name">
+        <input type="text" name="room" id="room" placeholder="Enter room code">
+        <button type="submit" class="join">Join</button>
+    </form>
 </body>
+<script src="chat.js"></script>
 </html>

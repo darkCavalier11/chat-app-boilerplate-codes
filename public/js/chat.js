@@ -1,4 +1,7 @@
 const socket = io()
+const query = location.search.replace('name', '').replace('?', '').replace('&', ' ').replace('room', '').replace('=', '').replace('=', '').split(' ')
+
+socket.emit('join', query)
 socket.on('count updated', (count)=>{
     console.log('count updated', count)
 })
